@@ -38,6 +38,7 @@ message CreateUserRequest {
   string password = 2;
   string firstName = 3;
   string lastName = 4;
+  string gender = 5;
 }
 
 message CreateUserResponse {

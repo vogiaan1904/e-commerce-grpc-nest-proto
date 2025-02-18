@@ -44,6 +44,7 @@ message LoginResponse {
 // Refresh token
 message RefreshTokenRequest {
   string refreshToken = 1;
+  string userId = 2;
 }
 
 message RefreshTokenResponse {

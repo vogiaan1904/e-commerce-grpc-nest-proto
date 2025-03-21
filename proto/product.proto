@@ -5,7 +5,10 @@ package product;
 service ProductService {
   rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse) {}
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {}
+  rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
+  rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse) {}
   rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse) {}
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse) {}
 }
 
 message ProductData {
@@ -14,6 +17,9 @@ message ProductData {
   string sku = 3;
   int32 stock = 4;
   double price = 5;
+  string description = 6;
+  repeated string categories = 7;
+  repeated string images = 8;
 }
 
 // CreateProduct
@@ -22,6 +28,10 @@ message CreateProductRequest {
   string sku = 2;
   int32 stock = 3;
   double price = 4;
+  // Add optional fields
+  string description = 5;
+  repeated string categories = 6;
+  repeated string images = 7;
 }
 
 message CreateProductResponse {
@@ -41,48 +51,42 @@ message FindOneResponse {
   ProductData data = 3;
 }
 
-// FindAll
-message FindAllRequest {
+// Pagination
+message PaginationRequest {
   int32 page = 1;
-  int32 limit = 2;
+  int32 perPage = 2;
 }
 
-message FindAllResponse {
+message PaginationResponse {
+  int32 totalItems = 1;
+  int32 totalPages = 2;
+  int32 currentPage = 3;
+  int32 perPage = 4;
+  bool next = 5;
+  bool prev = 6;
+}
+
+
+// FindMany
+message FindManyRequest {
+  PaginationRequest pagination = 1;
+  string shopId = 2;
+  string categoryId = 3;
+  string search_term = 4;
+}
+
+message FindManyResponse {
   int32 status = 1;
   repeated string error = 2;
   repeated ProductData data = 3;
-  int32 total = 4;
-}
+  PaginationResponse pagination = 4;
 
-// message SearchProductsRequest {
-//     string query = 1;        // Search term
-//     repeated string filters = 2;  // Category, brand, etc
-//     string sort_by = 3;     // price_asc, price_desc, newest
-//     int32 page = 4;
-//     int32 limit = 5;
-// }
-
-// FindByShop
-message FindByShopRequest {
-  string shopId = 1;
-  int32 page = 2;
-  int32 limit = 3;
-}
-
-message FindByShopResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  repeated ProductData data = 3;
-  int32 total = 4;
 }
 
 // UpdateProduct
 message UpdateProductRequest {
-  string id = 1;
-  string name = 2;
-  string sku = 3;
-  int32 stock = 4;
-  double price = 5;
+  string id  = 1;
+  ProductData data = 2;
 }
 
 message UpdateProductResponse {

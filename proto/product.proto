@@ -8,6 +8,7 @@ service ProductService {
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
   rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse) {}
   rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse) {}
+  rpc ActivateProduct(ActivateProductRequest) returns (ActivateProductResponse) {}
   rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse) {}
 }
 
@@ -30,10 +31,11 @@ message ProductData {
   int32 stock = 4;
   double price = 5;
   string description = 6;
-  repeated CategoryData categories = 7;
-  repeated ImageData images = 8;
-  string createdAt = 9;
-  string updatedAt = 10;
+  bool active = 7;
+  repeated CategoryData categories = 8;
+  repeated ImageData images = 9;
+  string createdAt = 10;
+  string updatedAt = 11;
 }
 
 // CreateProduct
@@ -112,15 +114,6 @@ message UpdateProductResponse {
   ProductData data = 3;
 }
 
-// DeleteProduct
-message DeleteProductRequest {
-  string id = 1;
-}
-
-message DeleteProductResponse {
-  int32 status = 1;
-  repeated string error = 2;
-}
 
 // DecreaseStock
 message DecreaseStockRequest {
@@ -129,6 +122,26 @@ message DecreaseStockRequest {
 }
 
 message DecreaseStockResponse {
+  int32 status = 1;
+  repeated string error = 2;
+}
+
+// ActivateProduct
+message ActivateProductRequest {
+  string id = 1;
+}
+
+message ActivateProductResponse {
+  int32 status = 1;
+  repeated string error = 2;
+}
+
+// DeleteProduct
+message DeleteProductRequest {
+  string id = 1;
+}
+
+message DeleteProductResponse {
   int32 status = 1;
   repeated string error = 2;
 }

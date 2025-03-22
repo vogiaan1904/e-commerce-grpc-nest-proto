@@ -103,7 +103,7 @@ message UpdateProductRequest {
   double price = 3;
   string description = 4;
   repeated string categoryIds = 5;  
-  repeated ImageData images = 6;    // Include full image data for updates
+  repeated string imageUrls = 6;   
 }
 
 message UpdateProductResponse {

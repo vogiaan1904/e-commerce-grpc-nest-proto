@@ -1,8 +1,10 @@
 syntax = "proto3";
 
 package product;
+import "google/protobuf/empty.proto";
 
 service ProductService {
+  // Product
   rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse) {}
   rpc FindById(FindByIdRequest) returns (FindByIdResponse) {}
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
@@ -10,6 +12,10 @@ service ProductService {
   rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse) {}
   rpc ActivateProduct(ActivateProductRequest) returns (ActivateProductResponse) {}
   rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse) {}
+
+  // Category
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {}
+  rpc FindAllCategories(google.protobuf.Empty) returns (FindAllCategoriesResponse) {}
 }
 
 message ImageData {
@@ -145,3 +151,21 @@ message DeleteProductResponse {
   int32 status = 1;
   repeated string error = 2;
 }
+
+// Category
+message CreateCategoryRequest {
+  string name = 1;
+}
+
+message CreateCategoryResponse {
+  int32 status = 1;
+  repeated string error = 2;
+  CategoryData data = 3;
+}
+
+message FindAllCategoriesResponse {
+  int32 status = 1;
+  repeated string error = 2;
+  repeated CategoryData data = 3;
+}
+

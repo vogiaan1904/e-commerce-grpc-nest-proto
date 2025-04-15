@@ -5,23 +5,23 @@ import "google/protobuf/empty.proto";
 
 service ProductService {
   // Product
-  rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse) {}
+  rpc CreateProduct(CreateProductRequest) returns (google.protobuf.Empty) {}
   rpc FindById(FindByIdRequest) returns (FindByIdResponse) {}
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
-  rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse) {}
-  rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse) {}
-  rpc ActivateProduct(ActivateProductRequest) returns (ActivateProductResponse) {}
-  rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse) {}
+  rpc UpdateProduct(UpdateProductRequest) returns (google.protobuf.Empty) {}
+  rpc DecreaseStock(DecreaseStockRequest) returns (google.protobuf.Empty) {}
+  rpc ActivateProduct(ActivateProductRequest) returns (google.protobuf.Empty) {}
+  rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty) {}
 
   // Category
-  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse) {}
+  rpc CreateCategory(CreateCategoryRequest) returns (google.protobuf.Empty) {}
   rpc FindAllCategories(google.protobuf.Empty) returns (FindAllCategoriesResponse) {}
 }
 
 message ImageData {
   string id = 1;
   string url = 2;
-  bool isPrimary = 3;
+  bool is_primary = 3;
 }
 
 message CategoryData {
@@ -40,8 +40,6 @@ message ProductData {
   bool active = 7;
   repeated CategoryData categories = 8;
   repeated ImageData images = 9;
-  string createdAt = 10;
-  string updatedAt = 11;
 }
 
 // CreateProduct
@@ -51,14 +49,8 @@ message CreateProductRequest {
   int32 stock = 3;
   double price = 4;
   string description = 5;
-  repeated string categoryIds = 6;  
-  repeated string imageUrls = 7; 
-}
-
-message CreateProductResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  ProductData data = 3;
+  repeated string category_ids = 6;  
+  repeated string image_urls = 7; 
 }
 
 // FindOne
@@ -67,9 +59,7 @@ message FindByIdRequest {
 }
 
 message FindByIdResponse {
-  string status = 1;
-  repeated string error = 2;
-  ProductData data = 3;
+  ProductData product = 1;
 }
 
 // Pagination
@@ -79,27 +69,24 @@ message PaginationRequest {
 }
 
 message PaginationResponse {
-  int32 totalItems = 1;
-  int32 totalPages = 2;
-  int32 currentPage = 3;
-  int32 perPage = 4;
+  int32 total = 1;
+  int32 total_page = 2;
+  int32 current_page = 3;
+  int32 per_page = 4;
   bool next = 5;
   bool prev = 6;
 }
 
-
 // FindMany
 message FindManyRequest {
   PaginationRequest pagination = 1;
-  string shopId = 2;
-  string categoryId = 3;
+  string shop_id = 2;
+  string category_id = 3;
   string search_term = 4;
 }
 
 message FindManyResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  repeated ProductData data = 3;
+  repeated ProductData products = 3;
   PaginationResponse pagination = 4;
 
 }
@@ -110,16 +97,9 @@ message UpdateProductRequest {
   string name = 2;
   double price = 3;
   string description = 4;
-  repeated string categoryIds = 5;  
-  repeated string imageUrls = 6;   
+  repeated string category_ids = 5;  
+  repeated string image_urls = 6;   
 }
-
-message UpdateProductResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  ProductData data = 3;
-}
-
 
 // DecreaseStock
 message DecreaseStockRequest {
@@ -127,19 +107,9 @@ message DecreaseStockRequest {
   int32 quantity = 2;
 }
 
-message DecreaseStockResponse {
-  int32 status = 1;
-  repeated string error = 2;
-}
-
 // ActivateProduct
 message ActivateProductRequest {
   string id = 1;
-}
-
-message ActivateProductResponse {
-  int32 status = 1;
-  repeated string error = 2;
 }
 
 // DeleteProduct
@@ -147,25 +117,12 @@ message DeleteProductRequest {
   string id = 1;
 }
 
-message DeleteProductResponse {
-  int32 status = 1;
-  repeated string error = 2;
-}
-
 // Category
 message CreateCategoryRequest {
   string name = 1;
 }
 
-message CreateCategoryResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  CategoryData data = 3;
-}
-
 message FindAllCategoriesResponse {
-  int32 status = 1;
-  repeated string error = 2;
-  repeated CategoryData data = 3;
+  repeated CategoryData categories = 3;
 }
 

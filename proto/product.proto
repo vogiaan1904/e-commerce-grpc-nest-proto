@@ -48,7 +48,7 @@ message CreateProductRequest {
   int32 stock = 3;
   double price = 4;
   string description = 5;
-  repeated string category_ids = 6;  
+  repeated string category_idss = 6;  
   repeated string image_urls = 7; 
 }
 

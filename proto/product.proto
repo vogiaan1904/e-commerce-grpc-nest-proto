@@ -72,8 +72,8 @@ message PaginationResponse {
   int32 total_page = 2;
   int32 current_page = 3;
   int32 per_page = 4;
-  bool next = 5;
-  bool prev = 6;
+  int32 next = 5;
+  int32 prev = 6;
 }
 
 // FindMany

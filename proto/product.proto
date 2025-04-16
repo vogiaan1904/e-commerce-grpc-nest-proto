@@ -45,7 +45,6 @@ message ProductData {
 // CreateProduct
 message CreateProductRequest {
   string name = 1;
-  string sku = 2;
   int32 stock = 3;
   double price = 4;
   string description = 5;

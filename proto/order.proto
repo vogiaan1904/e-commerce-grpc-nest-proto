@@ -9,23 +9,44 @@ service OrderService {
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {}
 }
 
+enum OrderStatus {
+  PENDING = 0;
+  PROCESSING = 1;
+  COMPLETED = 2;
+  CANCELLED = 3;
+}
+
 message OrderData {
   string id = 1;
   int32 product_id = 2;
   int32 quantity = 3;
-  string user_id = 4;
+  float total_amount = 4;
+  string user_id = 5;
+  OrderStatus status = 6;
 }
 
 message CreateOrderRequest {
   int32 product_id = 1;
   int32 quantity = 2;
-  string user_id = 3;
+  float total_amount = 3;
+  string user_id = 4;
 }
 
+// FindOne
 message FindOneRequest {
   string id = 1;
 }
 
 message FindOneResponse {
   OrderData order = 3;
+}
+
+// FindMany
+message FindManyRequest {
+  string user_id = 1;
+  OrderStatus status = 2;
+}
+
+message FindManyResponse {
+  repeated OrderData orders = 3;
 }

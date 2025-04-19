@@ -3,6 +3,8 @@ syntax = "proto3";
 
 package order;
 
+option go_package = "order-svc/internal/protobuf/orderpb;orderpb";
+
 import "google/protobuf/empty.proto";
 service OrderService {
   rpc CreateOrder(CreateOrderRequest) returns (google.protobuf.Empty) {}

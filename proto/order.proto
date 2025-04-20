@@ -3,7 +3,7 @@ syntax = "proto3";
 
 package order;
 
-option go_package = "order-svc/internal/protobuf/orderpb;orderpb";
+option go_package = "github.com/vogiaan1904/e-commerce-grpc-nest-proto/protogen/protogen/order";
 
 import "google/protobuf/empty.proto";
 service OrderService {

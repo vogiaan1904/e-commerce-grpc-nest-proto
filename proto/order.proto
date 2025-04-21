@@ -7,8 +7,9 @@ option go_package = "github.com/vogiaan1904/e-commerce-grpc-nest-proto/protogen/
 
 import "google/protobuf/empty.proto";
 service OrderService {
-  rpc CreateOrder(CreateOrderRequest) returns (google.protobuf.Empty) {}
+  rpc CreateOrder(CreateRequest) returns (google.protobuf.Empty) {}
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {}
+  rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
 }
 
 enum OrderStatus {
@@ -29,10 +30,9 @@ message OrderData {
   OrderStatus status = 8;
 }
 
-message CreateOrderRequest {
+message CreateRequest {
   string product_id = 1;
   int32 quantity = 2;
-  double total_amount = 3;
   string user_id = 4;
 }
 

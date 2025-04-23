@@ -1,13 +1,10 @@
-
 syntax = "proto3";
-
 package order;
-
 option go_package = "github.com/vogiaan1904/e-commerce-grpc-nest-proto/protogen/golang/order";
-
 import "google/protobuf/empty.proto";
+
 service OrderService {
-  rpc CreateOrder(CreateRequest) returns (google.protobuf.Empty) {}
+  rpc Create(CreateRequest) returns (google.protobuf.Empty) {}
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {}
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
 }
@@ -31,6 +28,8 @@ message OrderData {
   OrderStatus status = 8;
 }
 
+
+// Create
 message CreateRequest {
   string product_id = 1;
   int32 quantity = 2;

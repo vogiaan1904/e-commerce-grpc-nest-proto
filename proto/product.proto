@@ -10,6 +10,7 @@ service ProductService {
   rpc CreateProduct(CreateProductRequest) returns (google.protobuf.Empty) {}
   rpc FindById(FindByIdRequest) returns (FindByIdResponse) {}
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
+  rpc List(google.protobuf.Empty) returns (stream ProductData) {}
   rpc UpdateProduct(UpdateProductRequest) returns (google.protobuf.Empty) {}
   rpc DecreaseStock(DecreaseStockRequest) returns (google.protobuf.Empty) {}
   rpc ActivateProduct(ActivateProductRequest) returns (google.protobuf.Empty) {}

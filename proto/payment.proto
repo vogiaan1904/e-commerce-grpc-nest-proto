@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package payment;
+option go_package = "github.com/vogiaan1904/e-commerce-grpc-nest-proto/protogen/golang/payment";
+import "google/protobuf/empty.proto";
+
+service PaymentService {
+  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse) {}
+  rpc GetPaymentStatus(GetPaymentStatusRequest) returns (GetPaymentStatusResponse) {}
+  rpc CancelPayment(CancelPaymentRequest) returns (google.protobuf.Empty) {}
+}
+
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PAYMENT_STATUS_PENDING = 1;
+  PAYMENT_STATUS_COMPLETED = 2;
+  PAYMENT_STATUS_FAILED = 3;
+  PAYMENT_STATUS_CANCELLED = 4;
+  PAYMENT_STATUS_REFUNDED = 5;
+}
+
+enum PaymentMethod {
+  PAYMENT_METHOD_UNSPECIFIED = 0;
+  PAYMENT_METHOD_CREDIT_CARD = 1;
+  PAYMENT_METHOD_PAYPAL = 2;
+  PAYMENT_METHOD_BANK_TRANSFER = 3;
+  PAYMENT_METHOD_CRYPTO = 4;
+}
+
+message PaymentData {
+  string id = 1;
+  string order_id = 2;
+  string user_id = 3;
+  double amount = 4;
+  PaymentStatus status = 5;
+  PaymentMethod method = 6;
+  string gateway_reference = 7; // External reference ID from payment provider
+  string description = 8;
+  string created_at = 9;
+  string updated_at = 10;
+}
+
+// Process Payment
+message ProcessPaymentRequest {
+  string order_id = 1;
+  string user_id = 2;
+  double amount = 3;
+  PaymentMethod method = 4;
+  string description = 5;
+  map<string, string> metadata = 6; // For gateway-specific data
+}
+
+message ProcessPaymentResponse {
+  PaymentData payment = 1;
+  string payment_url = 2; 
+}
+
+// Get Payment Status
+message GetPaymentStatusRequest {
+  string payment_id = 1;
+}
+
+message GetPaymentStatusResponse {
+  PaymentData payment = 1;
+}
+
+// Cancel Payment
+message CancelPaymentRequest {
+  string payment_id = 1;
+  string reason = 2;
+}

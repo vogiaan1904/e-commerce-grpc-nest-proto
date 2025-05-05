@@ -35,9 +35,10 @@ message PaymentData {
   PaymentStatus status = 5;
   PaymentMethod method = 6;
   string gateway_reference = 7; // External reference ID from payment provider
-  string description = 8;
-  string created_at = 9;
-  string updated_at = 10;
+  string gateway_name = 8;
+  string description = 9;
+  string created_at = 10;
+  string updated_at = 11;
 }
 
 // Process Payment
@@ -47,7 +48,8 @@ message ProcessPaymentRequest {
   double amount = 3;
   PaymentMethod method = 4;
   string description = 5;
-  map<string, string> metadata = 6; // For gateway-specific data
+  map<string, string> metadata = 6; 
+  string gateway_name = 7;
 }
 
 message ProcessPaymentResponse {

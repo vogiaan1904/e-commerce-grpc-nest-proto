@@ -7,6 +7,7 @@ service OrderService {
   rpc Create(CreateRequest) returns (google.protobuf.Empty) {}
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {}
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
+  rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty) {}
 }
 
 enum OrderStatus {
@@ -55,4 +56,10 @@ message FindManyRequest {
 
 message FindManyResponse {
   repeated OrderData orders = 3;
+}
+
+// UpdateStatus
+message UpdateStatusRequest {
+  string id = 1;
+  OrderStatus status = 2;
 }

@@ -12,7 +12,8 @@ service ProductService {
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
   rpc List(google.protobuf.Empty) returns (stream ProductData) {}
   rpc UpdateProduct(UpdateProductRequest) returns (google.protobuf.Empty) {}
-  rpc DecreaseStock(DecreaseStockRequest) returns (google.protobuf.Empty) {}
+  rpc ReserveInventory(ReserveInventoryRequest) returns (google.protobuf.Empty) {}
+  rpc ReleaseInventory(ReleaseInventoryRequest) returns (google.protobuf.Empty) {}
   rpc ActivateProduct(ActivateProductRequest) returns (google.protobuf.Empty) {}
   rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty) {}
 
@@ -103,8 +104,14 @@ message UpdateProductRequest {
   repeated string image_urls = 6;   
 }
 
-// DecreaseStock
-message DecreaseStockRequest {
+// ReserveInventory
+message ReserveInventoryRequest {
+  string id = 1;
+  int32 quantity = 2;
+}
+
+// ReleaseInventory
+message ReleaseInventoryRequest {
   string id = 1;
   int32 quantity = 2;
 }

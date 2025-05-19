@@ -60,6 +60,9 @@ message ProcessPaymentResponse {
 // Get Payment Status
 message GetPaymentStatusRequest {
   string payment_id = 1;
+  string order_id = 2;
+  PaymentMethod method = 3;
+  string gateway_name = 4;
 }
 
 message GetPaymentStatusResponse {
@@ -69,5 +72,8 @@ message GetPaymentStatusResponse {
 // Cancel Payment
 message CancelPaymentRequest {
   string payment_id = 1;
-  string reason = 2;
+  string order_id = 2;
+  PaymentMethod method = 3;
+  string gateway_name = 4;
+  string reason = 5;
 }

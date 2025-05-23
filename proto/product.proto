@@ -10,7 +10,8 @@ service ProductService {
   rpc CreateProduct(CreateProductRequest) returns (google.protobuf.Empty) {}
   rpc FindById(FindByIdRequest) returns (FindByIdResponse) {}
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
-  rpc List(ListRequest) returns (stream ProductData) {}
+  rpc ListStream(ListRequest) returns (stream ProductData) {}
+  rpc List(ListRequest) returns (ListResponse) {}
   rpc UpdateProduct(UpdateProductRequest) returns (google.protobuf.Empty) {}
   rpc ReserveInventory(ReserveInventoryRequest) returns (google.protobuf.Empty) {}
   rpc ReleaseInventory(ReleaseInventoryRequest) returns (google.protobuf.Empty) {}
@@ -97,6 +98,10 @@ message FindManyResponse {
 
 message ListRequest {
   repeated string ids = 1;
+}
+
+message ListResponse {
+  repeated ProductData products = 1;
 }
 
 // UpdateProduct

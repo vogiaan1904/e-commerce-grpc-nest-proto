@@ -48,6 +48,11 @@ message CreateRequest {
   string user_id = 2;
 }
 
+message CreateResponse {
+  string order_id = 1;
+  string workflow_id = 2;
+}
+
 // FindOne
 message FindOneRequest {
   string id = 1;

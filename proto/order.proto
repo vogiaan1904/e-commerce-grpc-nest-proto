@@ -4,7 +4,7 @@ option go_package = "github.com/vogiaan1904/e-commerce-grpc-nest-proto/protogen/
 import "google/protobuf/empty.proto";
 
 service OrderService {
-  rpc Create(CreateRequest) returns (google.protobuf.Empty) {}
+  rpc Create(CreateRequest) returns (CreateResponse) {}
   rpc FindOne(FindOneRequest) returns (FindOneResponse) {}
   rpc FindMany(FindManyRequest) returns (FindManyResponse) {}
   rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty) {}

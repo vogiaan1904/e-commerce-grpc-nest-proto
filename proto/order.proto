@@ -72,3 +72,26 @@ message UpdateStatusRequest {
   string id = 1;
   OrderStatus status = 2;
 }
+
+
+// Workflow
+
+enum OrderWorkflowStatus {
+  ORDER_WORKFLOW_STATUS_UNSPECIFIED = 0;
+  ORDER_WORKFLOW_STATUS_PROCESSING = 1;
+  ORDER_WORKFLOW_STATUS_COMPLETED = 2;
+  ORDER_WORKFLOW_STATUS_CANCELLED = 3;
+}
+
+message OrderWorkflowParams {
+  string order_id = 1;
+  string user_id = 2;
+  repeated OrderItem items = 3;
+  double total_amount = 4;
+}
+
+message OrderWorkflowResult {
+  string order_id = 1;
+  string status = 2;
+  string error_message = 3;
+}

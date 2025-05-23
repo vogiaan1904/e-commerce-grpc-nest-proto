@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package workflow;
+
+
+message OrderWorkflowResult {
+    string order_id = 1;
+    string status = 2;
+    string error_message = 3;
+}

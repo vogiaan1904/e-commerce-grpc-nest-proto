@@ -95,6 +95,10 @@ message FindManyResponse {
 
 }
 
+message ListRequest {
+  repeated string ids = 1;
+}
+
 // UpdateProduct
 message UpdateProductRequest {
   string id = 1;

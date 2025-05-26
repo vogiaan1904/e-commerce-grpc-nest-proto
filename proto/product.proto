@@ -115,17 +115,27 @@ message UpdateProductRequest {
 }
 
 // ReserveInventory
-message ReserveInventoryRequest {
-  string id = 1;
+message ReverseInventoryItem{
+  string product_id = 1;
   int32 quantity = 2;
 }
+
+message ReserveInventoryRequest {
+  repeated ReverseInventoryItem items = 1;
+}
+
 
 // ReleaseInventory
-message ReleaseInventoryRequest {
-  string id = 1;
+message ReleaseInventoryItem {
+  string product_id = 1;
   int32 quantity = 2;
 }
 
+message ReleaseInventoryRequest {
+  repeated ReleaseInventoryItem items = 1;  
+}
+
+// UpdateStock
 message UpdateStockRequest {
   string id = 1;
   int32 quantity = 2;

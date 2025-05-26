@@ -91,8 +91,7 @@ enum OrderWorkflowStatus {
 message OrderWorkflowParams {
   string order_id = 1;
   string user_id = 2;
-  repeated OrderItem items = 3;
-  double total_amount = 4;
+  double total_amount = 3;
 }
 
 message OrderWorkflowResult {

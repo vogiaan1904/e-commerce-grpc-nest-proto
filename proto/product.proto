@@ -136,9 +136,13 @@ message ReleaseInventoryRequest {
 }
 
 // UpdateStock
-message UpdateStockRequest {
-  string id = 1;
+message UpdateStockItem {
+  string product_id = 1;
   int32 quantity = 2;
+}
+
+message UpdateStockRequest {
+  repeated UpdateStockItem items = 1;
 }
 
 // ActivateProduct

@@ -29,7 +29,7 @@ enum PaymentMethod {
 
 message PaymentData {
   string id = 1;
-  string order_id = 2;
+  string order_code = 2;
   string user_id = 3;
   double amount = 4;
   PaymentStatus status = 5;
@@ -43,7 +43,7 @@ message PaymentData {
 
 // Process Payment
 message ProcessPaymentRequest {
-  string order_id = 1;
+  string order_code = 1;
   string user_id = 2;
   double amount = 3;
   PaymentMethod method = 4;
@@ -60,7 +60,7 @@ message ProcessPaymentResponse {
 // Get Payment Status
 message GetPaymentStatusRequest {
   string payment_id = 1;
-  string order_id = 2;
+  string order_code = 2;
   PaymentMethod method = 3;
   string gateway_name = 4;
 }
@@ -72,7 +72,7 @@ message GetPaymentStatusResponse {
 // Cancel Payment
 message CancelPaymentRequest {
   string payment_id = 1;
-  string order_id = 2;
+  string order_code = 2;
   PaymentMethod method = 3;
   string gateway_name = 4;
   string reason = 5;

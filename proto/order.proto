@@ -58,8 +58,10 @@ message CreateResponse {
 
 // FindOne
 message FindOneRequest {
-  string id = 1;
-  string code = 2;
+  oneof request {
+    string id = 1;
+    string code = 2;
+  }
 }
 
 message FindOneResponse {
@@ -78,8 +80,10 @@ message FindManyResponse {
 
 // UpdateStatus
 message UpdateStatusRequest {
-  string id = 1;
-  string code = 2;
+  oneof request {
+    string id = 1;
+    string code = 2;
+  }
   OrderStatus status = 3;
 }
 

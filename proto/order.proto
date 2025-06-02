@@ -23,10 +23,11 @@ enum OrderStatus {
 
 message OrderData {
   string id = 1;
-  repeated OrderItem items = 2;
-  string user_id = 3;
-  OrderStatus status = 4;
-  double total_amount = 5;
+  string code = 2;
+  repeated OrderItem items = 3;
+  string user_id = 4;
+  OrderStatus status = 5;
+  double total_amount = 6;
 }
 
 message OrderItemRequest {
@@ -50,13 +51,14 @@ message CreateRequest {
 }
 
 message CreateResponse {
-  string order_id = 1;
+  string order_code = 1;
   string workflow_id = 2;
 }
 
 // FindOne
 message FindOneRequest {
   string id = 1;
+  string code = 2;
 }
 
 message FindOneResponse {
@@ -76,7 +78,8 @@ message FindManyResponse {
 // UpdateStatus
 message UpdateStatusRequest {
   string id = 1;
-  OrderStatus status = 2;
+  string code = 2;
+  OrderStatus status = 3;
 }
 
 
@@ -90,13 +93,13 @@ enum OrderWorkflowStatus {
 }
 
 message OrderWorkflowParams {
-  string order_id = 1;
+  string order_code = 1;
   string user_id = 2;
   double total_amount = 3;
 }
 
 message OrderWorkflowResult {
-  string order_id = 1;
+  string order_code = 1;
   string status = 2;
   string error_message = 3;
 }

@@ -53,6 +53,7 @@ message CreateRequest {
 message CreateResponse {
   string order_code = 1;
   string workflow_id = 2;
+  string payment_url = 3;
 }
 
 // FindOne

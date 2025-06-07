@@ -47,7 +47,7 @@ message ProcessPaymentRequest {
   string order_code = 1;
   string user_id = 2;
   double amount = 3;
-  PaymentMethod method = 4;
+  string method = 4;
   string description = 5;
   map<string, string> metadata = 6; 
   string provider = 7;                   // Generic provider name (gateway/bank/crypto-network)

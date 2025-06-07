@@ -5,74 +5,38 @@ option go_package = "github.com/vogiaan1904/e-commerce-grpc-nest-proto/protogen/
 import "google/protobuf/empty.proto";
 
 service PaymentService {
-  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse) {}
-  rpc GetPaymentStatus(GetPaymentStatusRequest) returns (GetPaymentStatusResponse) {}
-  rpc CancelPayment(CancelPaymentRequest) returns (google.protobuf.Empty) {}
-}
-
-enum PaymentStatus {
-  STATUS_UNSPECIFIED = 0;
-  PENDING = 1;
-  COMPLETED = 2;
-  FAILED = 3;
-  CANCELLED = 4;
-  REFUNDED = 5;
-}
-
-enum PaymentMethod {
-  METHOD_UNSPECIFIED = 0;
-  CREDIT_CARD = 1;
-  PAYPAL = 2;
-  BANK_TRANSFER = 3;
-  CRYPTO = 4;
+  rpc ProcessBankTransferPayment(ProcessBankTransferPaymentRequest) returns (ProcessBankTransferPaymentResponse) {}
+  rpc CancelBankTransferPayment(CancelBankTransferPaymentRequest) returns (google.protobuf.Empty) {}
 }
 
 
-message PaymentData {
+message BankTransferPaymentData {
   string id = 1;
   string order_code = 2;
   string user_id = 3;
   double amount = 4;
-  PaymentStatus status = 5;
-  PaymentMethod method = 6;
-  string provider = 7;
-  string provider_details = 8;
-  map<string, string> metadata = 9; 
-  string created_at = 10;
-  string updated_at = 11;
+  string provider = 5;
+  string provider_details = 6;
+  map<string, string> metadata = 7; 
 }
 
 // Process Payment
-message ProcessPaymentRequest {
+message ProcessBankTransferPaymentRequest {
   string order_code = 1;
   string user_id = 2;
   double amount = 3;
-  string method = 4;
-  string description = 5;
+  string provider = 4;                  
+  string provider_details = 5;    
   map<string, string> metadata = 6; 
-  string provider = 7;                   // Generic provider name (gateway/bank/crypto-network)
-  string provider_details = 8;           // JSON string for provider-specific details
 }
 
-message ProcessPaymentResponse {
-  PaymentData payment = 1;
+message ProcessBankTransferPaymentResponse {
+  BankTransferPaymentData payment = 1;
   string payment_url = 2; 
 }
 
-// Get Payment Status
-message GetPaymentStatusRequest {
-  oneof payment_identifier {
-    string payment_id = 1;
-    string order_code = 2;
-  }
-}
-
-message GetPaymentStatusResponse {
-  PaymentStatus status = 1;
-}
-
 // Cancel Payment
-message CancelPaymentRequest {
+message CancelBankTransferPaymentRequest {
   oneof payment_identifier {
     string payment_id = 1;
     string order_code = 2;

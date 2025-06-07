@@ -48,6 +48,8 @@ message OrderItem {
 message CreateRequest {
   repeated OrderItemRequest items = 1;
   string user_id = 2;
+  PaymentMethod payment_method = 3;
+  map<string, string> metadata = 5;
 }
 
 message CreateResponse {

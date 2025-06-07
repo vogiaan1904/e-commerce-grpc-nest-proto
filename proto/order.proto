@@ -28,6 +28,9 @@ message OrderData {
   string user_id = 4;
   OrderStatus status = 5;
   double total_amount = 6;
+  string payment_method = 7;
+  string provider = 8;
+  string provider_details = 9;
 }
 
 message OrderItemRequest {

@@ -5,12 +5,12 @@ option go_package = "github.com/vogiaan1904/e-commerce-grpc-nest-proto/protogen/
 import "google/protobuf/empty.proto";
 
 service PaymentService {
-  rpc ProcessBankTransferPayment(ProcessBankTransferPaymentRequest) returns (ProcessBankTransferPaymentResponse) {}
-  rpc CancelBankTransferPayment(CancelBankTransferPaymentRequest) returns (google.protobuf.Empty) {}
+  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse) {}
+  rpc CancelPayment(CancelPaymentRequest) returns (google.protobuf.Empty) {}
 }
 
-
-message BankTransferPaymentData {
+// Bank transfer method
+message PaymentData {
   string id = 1;
   string order_code = 2;
   string user_id = 3;
@@ -20,8 +20,7 @@ message BankTransferPaymentData {
   map<string, string> metadata = 7; 
 }
 
-// Process Payment
-message ProcessBankTransferPaymentRequest {
+message ProcessPaymentRequest {
   string order_code = 1;
   string user_id = 2;
   double amount = 3;
@@ -30,13 +29,12 @@ message ProcessBankTransferPaymentRequest {
   map<string, string> metadata = 6; 
 }
 
-message ProcessBankTransferPaymentResponse {
-  BankTransferPaymentData payment = 1;
+message ProcessPaymentResponse {
+  PaymentData payment = 1;
   string payment_url = 2; 
 }
 
-// Cancel Payment
-message CancelBankTransferPaymentRequest {
+message CancelPaymentRequest {
   oneof payment_identifier {
     string payment_id = 1;
     string order_code = 2;
